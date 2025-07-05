@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "dist/widget.js", "use": "@vercel/static" },
+    { "src": "dist/widget.css", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/widget.js", "dest": "/dist/widget.js" },
+    { "src": "/widget.css", "dest": "/dist/widget.css" }
+  ]
+}
