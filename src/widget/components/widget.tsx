@@ -9,7 +9,7 @@ export function Widget() {
           fontSize: '24px',
         }}
       >
-        My Widget
+        My Widget 12
       </h1>
       <Calendar />
     </div>
