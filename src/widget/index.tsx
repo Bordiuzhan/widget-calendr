@@ -12,6 +12,9 @@ function initializeWidget() {
 
 function onReady() {
   try {
+    const placeholder =
+      document.querySelector('[data-widget-placeholder]') || document.body;
+
     const element = document.createElement('div');
     const shadow = element.attachShadow({ mode: 'open' });
     const shadowRoot = document.createElement('div');
@@ -19,15 +22,13 @@ function onReady() {
 
     shadowRoot.id = 'widget-root';
 
-    const component = (
-      <WidgetContainer clientKey={clientKey} />
-    );
+    const component = <WidgetContainer clientKey={clientKey} />;
 
     shadow.appendChild(shadowRoot);
     injectStyle(shadowRoot);
     hydrateRoot(shadowRoot, component);
 
-    document.body.appendChild(element);
+    placeholder.appendChild(element);
   } catch (error) {
     console.warn('Widget initialization failed:', error);
   }

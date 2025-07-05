@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Тестова сторінка з віджетом</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+      }
+      header,
+      footer {
+        background: #f4f4f4;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+      main {
+        max-width: 800px;
+        margin: auto;
+      }
+      .nav {
+        margin-bottom: 20px;
+      }
+      .nav a {
+        margin-right: 10px;
+        text-decoration: none;
+        color: steelblue;
+      }
+      .content {
+        margin-bottom: 40px;
+      }
+      .widget-placeholder {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Моя тестова сторінка</h1>
+    </header>
+
+    <nav class="nav">
+      <a href="#">Головна</a>
+      <a href="#">Про нас</a>
+      <a href="#">Контакти</a>
+    </nav>
+
+    <main>
+      <section class="content">
+        <h2>Розділ з текстом</h2>
+        <p>
+          Це декілька абзаців для перевірки, чи не конфліктують стилі вашого
+          віджету з основним сайтом.
+        </p>
+        <p>Можна додати більше контенту: зображення, списки, таблиці тощо.</p>
+        <ul>
+          <li>Пункт 1</li>
+          <li>Пункт 2</li>
+          <li>Пункт 3</li>
+        </ul>
+      </section>
+
+      <section class="content">
+        <h2>Розділ з формою</h2>
+        <form id="demo-form">
+          <label for="name">Ім’я:</label><br />
+          <input type="text" id="name" name="name" /><br /><br />
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" /><br /><br />
+          <button type="submit">Відправити</button>
+        </form>
+      </section>
+      <section class="content">
+        <h2>Розділ з віджетом</h2>
+        <div data-widget-placeholder></div>
+      </section>
+    </main>
+
+    <!-- Вставка віджета -->
+    <script async src="./dist/widget.js" data-client-key="test-key"></script>
+
+    <footer>
+      <p>&copy; 2025 Моя Компанія</p>
+    </footer>
+  </body>
+</html>
