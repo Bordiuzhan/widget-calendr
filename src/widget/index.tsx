@@ -1,7 +1,6 @@
 import { hydrateRoot } from 'react-dom/client';
 import { WidgetContainer } from './components/widget-container';
 import './styles/style.css';
-import { log } from 'console';
 
 function initializeWidget() {
   if (document.readyState !== 'loading') {
@@ -41,7 +40,6 @@ function injectStyle(shadowRoot: HTMLElement) {
   const fileName = process.env.WIDGET_NAME || 'widget';
   link.href = process.env.WIDGET_CSS_URL || `/${fileName}.css`;
   shadowRoot.appendChild(link);
-  console.log(`Widget CSS loaded from:`);
 }
 
 function getClientKey() {

@@ -1,7 +1,14 @@
 import { Calendar } from './Calendar';
 export function Widget() {
   return (
-    <div style={{ padding: '20px' }}>
+    <div
+      style={{
+        padding: '20px',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <h1
         style={{
           textAlign: 'center',
@@ -9,7 +16,7 @@ export function Widget() {
           fontSize: '24px',
         }}
       >
-        My Widget 12
+        My Widget Exampl
       </h1>
       <Calendar />
     </div>
