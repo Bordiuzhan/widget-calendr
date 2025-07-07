@@ -1,18 +1,16 @@
 import { useMemo, useState } from 'react';
-import { VIEW_MODES, WEEKDAYS } from '../../constants';
 import './Calendar.css';
-import CalendarGrid from './CalendarGrid';
-import generateMonth from '../../utils/generateMonth';
 import { Day } from '../../types/calendar';
+import { VIEW_MODES, WEEKDAYS } from '../../constants';
+import generateMonth from '../../utils/generateMonth';
+import CalendarGrid from './CalendarGrid';
 import CalendarHeader from './CalendarHeader';
+import WeeklyCalendar from './WeeklyCalendar';
 
 export function Calendar() {
   const now = new Date();
   const [currentMonth, setCurrentMonth] = useState(now.getMonth());
   const [currentYear, setCurrentYear] = useState(now.getFullYear());
-  /*   const [currentWeek, setCurrentWeek] = useState(
-    Math.ceil((now.getDate() - 1) / 7),
-  ); */
   const [selectedDate, setSelectedDate] = useState<Day[]>([]);
   const [viewMode, setViewMode] = useState<'month' | 'week' | 'day'>(
     VIEW_MODES[0],
@@ -71,7 +69,7 @@ export function Calendar() {
           setSelectedDate={setSelectedDate}
         />
       ) : viewMode === 'week' ? (
-        <CalendarGridWeek />
+        <WeeklyCalendar />
       ) : viewMode === 'day' ? (
         <div className='calendar-day-view'>
           View soon, this feature will be available.

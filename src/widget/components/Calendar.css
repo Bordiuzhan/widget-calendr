@@ -145,5 +145,49 @@
   margin: 0;
 }
 
-.empty {
+/* --- Week capsule -------------------------------------------------- */
+.week-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 6px 18px;
+  border: 1px solid #d0d0d0;
+  border-radius: 28px;
+
+  background: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  user-select: none;
+}
+
+.week-nav__arrow {
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 50%;
+  transition: background-color 0.15s ease;
+}
+
+.week-nav__arrow:hover {
+  background-color: #f2f2f2;
+}
+
+.week-nav__label {
+  white-space: nowrap;
+}
+
+/* screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
 }

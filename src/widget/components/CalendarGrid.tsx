@@ -24,7 +24,6 @@ export default function CalendarGrid(props: CalendarGridProps) {
     );
     return fullDateA.getTime() - fullDateB.getTime();
   });
-  console.log('Sorted selected dates:', sortedSelectedDate);
 
   const isFirstInRange = (d: Day) => {
     return (
