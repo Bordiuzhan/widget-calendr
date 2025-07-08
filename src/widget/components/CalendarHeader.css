@@ -1,0 +1,94 @@
+/* Calendar Header Styles */
+
+/* ───────────── Заголовок та навігація ───────────── */
+.calendar-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+/* Капсула «‹  Month / Week ›» */
+.calendar-header__navigation {
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #afafaf;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  overflow: hidden;
+  transition: font-size 0.15s ease;
+}
+
+.calendar-nav__button {
+  font-weight: bold;
+  padding: 13px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.calendar-nav__button:hover {
+}
+
+.calendar-nav__month-year {
+  padding: 13px 0;
+}
+
+/* ───────────── Перемикач «Month / Week / Day» ───────────── */
+
+.calendar-header__controls {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 65%;
+}
+
+.calendar-view-toggle__label {
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.calendar-view-toggle__btn {
+  border: 1px solid #afafaf;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.calendar-view-toggle__btn:not(:last-child) {
+  margin-right: 8px;
+}
+
+.calendar-view-toggle__btn.active {
+  background-color: #d3d3d3;
+  border-color: #d3d3d3;
+}
+
+.calendar-view-toggle__btn:hover {
+  background-color: #c0c0c0;
+  border-color: #c0c0c0;
+}
+
+/* ───────────── Фільтр «Show Only Free day» ───────────── */
+.calendar-filter__select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #afafaf;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+  text-align: center;
+  cursor: pointer;
+}

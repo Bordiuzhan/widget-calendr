@@ -1,6 +1,7 @@
+import './SlotCellMonth.css';
 import { Day } from '../../types/calendar';
 
-interface CalendarDayMonthProps {
+interface SlotCellMonthProps {
   d: Day;
   isSelected?: boolean;
   selectedDate: Day[];
@@ -9,7 +10,7 @@ interface CalendarDayMonthProps {
   isLastInRange?: boolean;
 }
 
-export default function CalendarDayMonth(props: CalendarDayMonthProps) {
+export default function SlotCellMonth(props: SlotCellMonthProps) {
   const {
     d,
     isSelected,
@@ -21,9 +22,10 @@ export default function CalendarDayMonth(props: CalendarDayMonthProps) {
   return (
     <div
       key={d.date.toISOString()}
-      className={`day cell ${isSelected ? 'selected' : ''} ${isFirstInRange ? 'rounded-left' : ''} ${isLastInRange ? 'rounded-right' : ''}`}
+      className={`day cell-month ${isSelected ? 'selected' : ''} ${isFirstInRange ? 'rounded-left' : ''} ${isLastInRange ? 'rounded-right' : ''}`}
     >
-      <div
+      <button
+        type='button'
         className='cell-content'
         onClick={() => {
           if (
@@ -43,7 +45,7 @@ export default function CalendarDayMonth(props: CalendarDayMonthProps) {
       >
         <p className='cell-date'>{d.date.getDate()}</p>
         <p className='cell-price'>${d.price} / hora</p>
-      </div>
+      </button>
     </div>
   );
 }

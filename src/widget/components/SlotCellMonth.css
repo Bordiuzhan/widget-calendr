@@ -1,0 +1,42 @@
+/*CalendarDayMonth Styles */
+.cell-month {
+  padding: 6px;
+}
+.cell-month.selected {
+  background-color: #8f8f8f;
+}
+.rounded-left {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+.rounded-right {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+.cell-month.selected :not(:last-child) {
+  border-radius: 20px;
+}
+.cell-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 6px;
+  align-items: start;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  background: #fff;
+}
+.cell-date {
+  font-size: 16px;
+  color: #000;
+  line-height: 1.4;
+}
+.cell-price {
+  font-size: 12px;
+  color: #666;
+}
+.cell-content p {
+  margin: 0;
+}

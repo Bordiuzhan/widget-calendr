@@ -16,3 +16,10 @@ button {
   color: inherit;
   background-color: transparent;
 }
+
+.grid-head {
+  display: contents;
+}
+.grid-body {
+  display: contents;
+}

@@ -1,57 +1,64 @@
-import React from 'react';
-import SlotCell from './SlotCell';
+import './TimeGrid.css';
+import { useEffect, useState } from 'react';
 import { Slot } from '../../types/calendar';
+import { generateSlots } from '../../utils/date';
+import SlotCellTime from './SlotCellTime';
 
 type TimeGridProps = {
-  week: Date[];
-  times: string[];
-  slots: Slot[];
-  onSelect: (slot: Slot) => void;
+  date: Date; // Дата для відображення слоту
 };
 
-export default function TimeGrid(props: TimeGridProps) {
-  const { week, times, slots, onSelect } = props;
-  return (
-    <div className='grid'>
-      <div className='grid-head'>
-        {week.map((d) => (
-          <div key={d.toISOString()} className='head-cell'>
-            {d.toLocaleDateString('en-GB', {
-              weekday: 'short',
-              day: '2-digit',
-              month: '2-digit',
-            })}
-          </div>
-        ))}
-      </div>
+/** 08:00 → 19:30 з кроком 30 хв */
+const TIME_STEPS = (() => {
+  const times: string[] = [];
+  for (let h = 8; h < 20; h++) {
+    times.push(`${String(h).padStart(2, '0')}:00`);
+    times.push(`${String(h).padStart(2, '0')}:30`);
+  }
+  return times;
+})();
 
-      <div className='grid-body'>
-        {times.map((t) => (
-          <React.Fragment key={t}>
-            {week.map((d) => {
-              const slot = slots.find(
-                (s) =>
-                  s.date.getHours() === Number(t.slice(0, 2)) &&
-                  s.date.getMinutes() === Number(t.slice(3)) &&
-                  s.date.toDateString() === d.toDateString(),
-              )!;
-              if (!slot) {
-                console.warn(
-                  `No slot found for time ${t} on ${d.toDateString()}`,
-                );
-                return null;
-              }
-              return (
-                <SlotCell
-                  key={slot.date.toISOString()}
-                  slot={slot}
-                  onClick={onSelect}
-                />
-              );
-            })}
-          </React.Fragment>
-        ))}
-      </div>
+export default function TimeGrid({ date }: TimeGridProps) {
+  /* ───── генеруємо слоти для одного дня ───── */
+  const [slots, setSlots] = useState<Slot[]>(() =>
+    generateSlots([date], TIME_STEPS),
+  );
+
+  /* при зміні дня – перегенеруємо */
+  useEffect(() => {
+    setSlots(generateSlots([date], TIME_STEPS));
+  }, [date]);
+  console.log('TimeGrid {slots}:', slots);
+
+  /* toggle «free / selected» */
+  const toggle = (slot: Slot) => {
+    if (slot.status === 'booked') return;
+    setSlots((prev) =>
+      prev.map((s) =>
+        s.date.getTime() === slot.date.getTime()
+          ? { ...s, status: s.status === 'selected' ? 'free' : 'selected' }
+          : s,
+      ),
+    );
+  };
+
+  return (
+    <div className='day-grid-scroll'>
+      {TIME_STEPS.map((t) => {
+        const [hours, minutes] = t.split(':').map(Number);
+        const slot = slots.find(
+          (s) => s.date.getHours() === hours && s.date.getMinutes() === minutes,
+        );
+        if (!slot) return null;
+
+        return (
+          <SlotCellTime
+            key={slot.date.toISOString()}
+            slot={slot}
+            onClick={toggle}
+          />
+        );
+      })}
     </div>
   );
 }

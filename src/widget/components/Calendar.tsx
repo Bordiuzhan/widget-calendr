@@ -3,9 +3,11 @@ import './Calendar.css';
 import { Day } from '../../types/calendar';
 import { VIEW_MODES, WEEKDAYS } from '../../constants';
 import generateMonth from '../../utils/generateMonth';
-import CalendarGrid from './CalendarGrid';
 import CalendarHeader from './CalendarHeader';
-import WeeklyCalendar from './WeeklyCalendar';
+import { addDays, startOfWeek } from 'date-fns';
+import DayGrid from './DayGrid';
+import MonthGrid from './MonthGrid';
+import TimeGrid from './TimeGrid';
 
 export function Calendar() {
   const now = new Date();
@@ -15,9 +17,14 @@ export function Calendar() {
   const [viewMode, setViewMode] = useState<'month' | 'week' | 'day'>(
     VIEW_MODES[0],
   );
+  const [baseDate, setBaseDate] = useState(
+    () => startOfWeek(new Date(), { weekStartsOn: 0 }), // Починаємо з поточного тижня, неділя
+  );
   const weekStartsOnMonday = false;
+  console.log('Reloaded Calendar component');
 
-  const goPrev = () => {
+  // Функції для перемикання місяців
+  const prevMonth = () => {
     if (currentMonth === 0) {
       setCurrentMonth(11);
       setCurrentYear((year) => year - 1);
@@ -25,8 +32,7 @@ export function Calendar() {
       setCurrentMonth((m) => m - 1);
     }
   };
-
-  const goNext = () => {
+  const nextMonth = () => {
     if (currentMonth === 11) {
       setCurrentMonth(0);
       setCurrentYear((year) => year + 1);
@@ -34,6 +40,12 @@ export function Calendar() {
       setCurrentMonth((m) => m + 1);
     }
   };
+  // Функції для перемикання тижня
+  const prevWeek = () => setBaseDate((d) => addDays(d, -7));
+  const nextWeek = () => setBaseDate((d) => addDays(d, 7));
+
+  const goPrev = viewMode === 'month' ? prevMonth : prevWeek;
+  const goNext = viewMode === 'month' ? nextMonth : nextWeek;
 
   const dayNames = weekStartsOnMonday
     ? [...WEEKDAYS.slice(1), WEEKDAYS[0]]
@@ -53,27 +65,27 @@ export function Calendar() {
       </h1>
       <p className='subtitle'>Minimal booking time - 2 hours. </p>
       <CalendarHeader
+        baseDate={baseDate}
         currentMonth={currentMonth}
         currentYear={currentYear}
         goPrev={goPrev}
         goNext={goNext}
         viewMode={viewMode}
         setViewMode={setViewMode}
+        startOnMonday={weekStartsOnMonday}
       />
 
       {viewMode === 'month' ? (
-        <CalendarGrid
+        <MonthGrid
           days={days}
           dayNames={dayNames}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
       ) : viewMode === 'week' ? (
-        <WeeklyCalendar />
+        <DayGrid baseDate={baseDate} />
       ) : viewMode === 'day' ? (
-        <div className='calendar-day-view'>
-          View soon, this feature will be available.
-        </div>
+        <TimeGrid date={baseDate} />
       ) : null}
     </div>
   );

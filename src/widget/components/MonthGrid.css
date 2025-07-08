@@ -1,0 +1,13 @@
+/*Calendar Grid Styles */
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.day-name {
+  padding: 8px 17px;
+  margin-bottom: 16px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  color: #8f8f8f;
+  font-weight: 500;
+}

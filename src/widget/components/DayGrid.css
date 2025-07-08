@@ -1,0 +1,35 @@
+/* TimeGrid Styles */
+
+.grid {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+}
+.grid-head-day {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.head-cell {
+  padding: 8px 17px;
+  margin-bottom: 16px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  color: #8f8f8f;
+  font-weight: 500;
+  max-height: 480px;
+  overflow-y: auto;
+}
+.grid-scroll {
+  max-height: 480px;
+  overflow-y: auto;
+}
+.grid-body-day {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.free:hover {
+}
